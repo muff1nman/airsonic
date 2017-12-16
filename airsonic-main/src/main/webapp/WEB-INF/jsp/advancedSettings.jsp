@@ -9,6 +9,22 @@
         function enableLdapFields() {
             $("#ldap").is(":checked") ? $("#ldapTable").show() : $("#ldapTable").hide();
         }
+        $(document).ready(function () {
+            $("#revproxytest").on("click", function() {
+                var proxyaddr = $(this).data("proxyaddr");
+                console.log("Testing with proxy address " + proxyaddr);
+                $.get( proxyaddr)
+                .done(function() {
+                    alert( "success" );
+                })
+                .fail(function() {
+                    alert( "error" );
+                })
+                .always(function() {
+                    alert( "finished" );
+                });
+            })
+        });
     </script>
 </head>
 
@@ -145,6 +161,9 @@
 
 </form:form>
 
+<div class="testSettings">
+    <button id="revproxytest" data-proxyaddr="<c:out value="${command.externalPingAddress}" />">Test Reverse Proxy</button>
+</div>
 <c:if test="${settings_reload}">
     <script language="javascript" type="text/javascript">
         parent.frames.left.location.href="left.view?";

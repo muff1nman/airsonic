@@ -44,6 +44,7 @@ public class AdvancedSettingsCommand {
     private String smtpUser;
     private String smtpPassword;
     private String smtpFrom;
+    private String externalPingAddress;
 
     public String getDownloadLimit() {
         return downloadLimit;
@@ -166,5 +167,13 @@ public class AdvancedSettingsCommand {
 
     public void setSmtpFrom(String smtpFrom) {
         this.smtpFrom = smtpFrom;
+    }
+
+    public void setExternalPingAddress(String externalPingAddress) {
+        this.externalPingAddress = externalPingAddress;
+    }
+
+    public String getExternalPingAddress() {
+        return externalPingAddress;
     }
 }

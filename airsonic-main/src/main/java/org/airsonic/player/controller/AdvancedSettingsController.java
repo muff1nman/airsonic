@@ -20,6 +20,7 @@
 package org.airsonic.player.controller;
 
 import org.airsonic.player.command.AdvancedSettingsCommand;
+import org.airsonic.player.service.NetworkService;
 import org.airsonic.player.service.SettingsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Controller for the page used to administrate advanced settings.
@@ -44,7 +47,7 @@ public class AdvancedSettingsController {
 
     // TODO replace with @GetMapping in Spring 4
     @RequestMapping(method = RequestMethod.GET)
-    protected String formBackingObject(Model model) throws Exception {
+    protected String formBackingObject(Model model, HttpServletRequest request) throws Exception {
         AdvancedSettingsCommand command = new AdvancedSettingsCommand();
         command.setDownloadLimit(String.valueOf(settingsService.getDownloadBitrateLimit()));
         command.setUploadLimit(String.valueOf(settingsService.getUploadBitrateLimit()));
@@ -60,6 +63,8 @@ public class AdvancedSettingsController {
         command.setSmtpPort(settingsService.getSmtpPort());
         command.setSmtpUser(settingsService.getSmtpUser());
         command.setSmtpFrom(settingsService.getSmtpFrom());
+
+        command.setExternalPingAddress(NetworkService.getBaseUrl(request) + "rest/ping");
 
         model.addAttribute("command", command);
         return "advancedSettings";
