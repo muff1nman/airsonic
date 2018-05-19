@@ -1,4 +1,4 @@
-package org.airsonic.test.api;
+package org.airsonic.test.cucumber.steps.api;
 
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
