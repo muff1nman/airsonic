@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty"},
         features = "classpath:features/",
-        glue = "org.airsonic.test.cucumber_hooks.docker")
+        glue = "org.airsonic.test.cucumber.steps")
 public class RunCukesTest {
 
 }
