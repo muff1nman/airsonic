@@ -1,7 +1,6 @@
 package org.airsonic.test.cucumber.steps.api;
 
 import cucumber.api.java8.En;
-import org.airsonic.test.SpringContext;
 import org.airsonic.test.cucumber.server.AirsonicServer;
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
@@ -10,14 +9,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.springframework.test.context.ContextConfiguration;
 import org.xmlunit.builder.Input;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.xmlunit.matchers.CompareMatcher.isIdenticalTo;
 
-@ContextConfiguration(classes = SpringContext.class)
 public class PingStepDef implements En {
 
     private CloseableHttpResponse response;
