@@ -1,7 +1,9 @@
 Feature: Stream API
 
   Background:
-    Given:
+    Given Media file stream/piano.mp3 is added
 
-  Scenario: Airsonic responds to ping requests
-    When
+  Scenario: Airsonic sends stream data
+    When A stream request is sent
+    Then The response should have some bytes
+    # TODO check length
