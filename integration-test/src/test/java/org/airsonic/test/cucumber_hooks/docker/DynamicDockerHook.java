@@ -5,6 +5,7 @@ import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.exceptions.DockerException;
 import com.spotify.docker.client.messages.*;
 import org.airsonic.test.cucumber.server.AirsonicServer;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -12,18 +13,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.Path;
 import java.util.Map;
 
 import static com.spotify.docker.client.DockerClient.RemoveContainerParam.*;
 
 @Component
-public class DockerHook implements AirsonicServer, EnvironmentAware, InitializingBean, DisposableBean {
+@Profile("dynamic")
+public class DynamicDockerHook implements AirsonicServer, EnvironmentAware, InitializingBean, DisposableBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(DockerHook.class);
+    private static final Logger logger = LoggerFactory.getLogger(DynamicDockerHook.class);
     public static final String AIRSONIC_DOCKER_IMAGE = "airsonic.docker.image";
     public static final String AIRSONIC_DOCKER_PORT = "airsonic.docker.port";
     public static final String AIRSONIC_READY_MAX_WAIT = "airsonic.ready.max_wait";
@@ -37,8 +41,8 @@ public class DockerHook implements AirsonicServer, EnvironmentAware, Initializin
     private Long readyMaxWaitTime;
     private Long readySleepTime;
 
-    public DockerHook() {
-        logger.debug("Creating new docker hook");
+    public DynamicDockerHook() {
+        logger.debug("Using hook for dynamically creating containers");
         docker = new DefaultDockerClient("unix:///var/run/docker.sock");
         testDockerIsAvail();
     }
@@ -59,6 +63,11 @@ public class DockerHook implements AirsonicServer, EnvironmentAware, Initializin
         } else {
             return serverUri;
         }
+    }
+
+    @Override
+    public void uploadToDefaultMusicFolder(Path directoryPath, String relativePath) {
+        throw new NotImplementedException();
     }
 
     public void startServer() {

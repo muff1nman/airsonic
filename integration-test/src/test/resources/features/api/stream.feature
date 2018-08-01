@@ -1,7 +1,8 @@
 Feature: Stream API
 
   Background:
-    Given Media file stream/piano.mp3 is added
+    Given Media file stream/piano/piano.mp3 is added
+    And a scan is done
 
   Scenario: Airsonic sends stream data
     When A stream request is sent

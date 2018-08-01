@@ -7,6 +7,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import java.nio.file.Paths;
+
 public class StreamStepDef implements En {
 
     private CloseableHttpResponse response;
@@ -14,8 +16,12 @@ public class StreamStepDef implements En {
 
     public StreamStepDef(AirsonicServer server) {
         this.client = HttpClientBuilder.create().build();
-        Given("Media file stream/piano.mp3 is added", () -> {
-            throw new NotImplementedException();
+        Given("Media file (.*) is added", (String mediaFile) -> {
+            // TODO fix this
+//            throw new NotImplementedException();
+            server.uploadToDefaultMusicFolder(
+                    Paths.get(this.getClass().getResource("/blobs/stream/piano").toURI()),
+                    "");
         });
 
         When("A stream request is sent", () -> {

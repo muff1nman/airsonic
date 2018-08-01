@@ -79,6 +79,11 @@
             <version>2.6.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.airsonic.player</groupId>
+            <artifactId>subsonic-rest-api</artifactId>
+            <version>10.2.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
