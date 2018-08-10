@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.java8.En;
 import org.airsonic.test.cucumber.server.AirsonicServer;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -55,9 +54,7 @@ public class ScanStepDef implements En {
 
         String responseAsString = EntityUtils.toString(response.getEntity());
         JsonNode jsonNode = mapper.readTree(responseAsString).get("subsonic-response");
-//        JsonNode jsonNode1 = jsonNode.get("subsonic-response");
         Response response = mapper.treeToValue(jsonNode, Response.class);
-//        Response response = mapper.readValue(jsonNode1.asText(), Response.class);
         return response.getScanStatus().isScanning();
     }
 
