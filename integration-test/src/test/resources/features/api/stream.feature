@@ -6,5 +6,5 @@ Feature: Stream API
 
   Scenario: Airsonic sends stream data
     When A stream request is sent
-    Then The response should have some bytes
+    Then The response bytes are equal
     # TODO check length

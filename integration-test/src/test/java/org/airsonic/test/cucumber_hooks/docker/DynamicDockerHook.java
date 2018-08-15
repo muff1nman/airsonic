@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -66,8 +67,13 @@ public class DynamicDockerHook implements AirsonicServer, EnvironmentAware, Init
     }
 
     @Override
-    public void uploadToDefaultMusicFolder(Path directoryPath, String relativePath) {
-        throw new NotImplementedException();
+    public void uploadToDefaultMusicFolder(Path localDir, String relativePath) {
+        try {
+            // TODO ensure localDir is a directory
+            docker.copyToContainer(localDir, containerId, "/airsonic/music/" + relativePath);
+        } catch (DockerException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void startServer() {
