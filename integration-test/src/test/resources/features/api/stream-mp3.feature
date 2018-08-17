@@ -1,4 +1,4 @@
-Feature: Stream API
+Feature: Stream API for MP3
 
   Background:
     Given Media file stream/piano/piano.mp3 is added
@@ -8,3 +8,4 @@ Feature: Stream API
     When A stream request is sent
     Then The response bytes are equal
     # TODO check length
+
