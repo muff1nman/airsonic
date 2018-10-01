@@ -47,8 +47,8 @@ public class StreamStepDef implements En {
             FileUtils.writeByteArrayToFile(new File("/tmp/bytearray"), body);
 
             byte[] expected = IOUtils.toByteArray(this.getClass().getResource("/blobs/stream/piano/piano.mp3").toURI());
-
-            HexDump.dump(expected, 0, System.out, 0);
+//
+//            HexDump.dump(expected, 0, System.out, 0);
 
             Assert.assertArrayEquals(expected, body);
         });
