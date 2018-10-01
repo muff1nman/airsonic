@@ -3,13 +3,12 @@ package org.airsonic.test.cucumber_hooks.docker;
 import com.spotify.docker.client.DefaultDockerClient;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.exceptions.DockerException;
-import com.spotify.docker.client.messages.*;
+import com.spotify.docker.client.messages.AttachedNetwork;
+import com.spotify.docker.client.messages.ContainerInfo;
 import org.airsonic.test.cucumber.server.AirsonicServer;
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Profile;
@@ -17,12 +16,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Map;
-
-import static com.spotify.docker.client.DockerClient.RemoveContainerParam.forceKill;
-import static com.spotify.docker.client.DockerClient.RemoveContainerParam.removeVolumes;
 
 @Component
 @Profile("existing")
